@@ -13,13 +13,13 @@ const Detalhes = ({ ator, atorImagens, atorFilmesSeries }) => {
             <Row>
                 <Col md={3}>
                     <Card>
-                        <Card.Img variant="top" src={(ator.profile_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : "https://image.tmdb.org/t/p/w500" + ator.profile_path} />
+                        <Card.Img variant="top" title={ator.name} src={(ator.profile_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${ator.profile_path}`} />
                     </Card>
                 </Col>
 
                 <Col md={9}>
                     <p><b>Data de Nascimento: </b>{dateFormatter(ator.birthday)}</p>
-                    <p><b>Local de Nascimento: </b>{ator.place_of_birth}</p>
+                    <p><b>Local de Nascimento: </b>{ator.place_of_birth == null? "O local de nascimento não foi informado.":ator.place_of_birth}</p>
                     {ator.deathday !== null ? <p><b>Data de Falecimento: </b>{dateFormatter(ator.deathday)}</p> : <></>}
                     <p>{ator.biography}</p>
                 </Col>
@@ -29,7 +29,7 @@ const Detalhes = ({ ator, atorImagens, atorFilmesSeries }) => {
                 <h2 className="pt-5">Fotos</h2>
                 {atorImagens.map(element => (
                     <Col md={2}>
-                        <Card.Img variant="top" title={ator.name} src={(element.file_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : "https://image.tmdb.org/t/p/w500" + element.file_path} style={{ marginBottom: "20px" }}></Card.Img>
+                        <Card.Img variant="top" title={ator.name} src={(element.file_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${element.file_path}`} style={{ marginBottom: "20px" }}></Card.Img>
                     </Col>
                 ))}
             </Row>
@@ -41,7 +41,7 @@ const Detalhes = ({ ator, atorImagens, atorFilmesSeries }) => {
                         return (
                             <Col md={2}>
                                 <Link href={'/films/' + element.id}>
-                                    <Card.Img variant="top" title={element.title} src={(element.poster_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : "https://image.tmdb.org/t/p/w500" + element.poster_path} style={{ marginBottom: "20px" }}></Card.Img>
+                                    <Card.Img variant="top" title={element.title} src={(element.poster_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${element.poster_path}`} style={{ marginBottom: "20px" }}></Card.Img>
                                 </Link>
                             </Col>
                         )
@@ -56,7 +56,7 @@ const Detalhes = ({ ator, atorImagens, atorFilmesSeries }) => {
                         return (
                             <Col md={2}>
                                 <Link href={'/series/' + element.id}>
-                                    <Card.Img variant="top" title={element.name} src={(element.poster_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : "https://image.tmdb.org/t/p/w500" + element.poster_path} style={{ marginBottom: "20px" }}></Card.Img>
+                                    <Card.Img variant="top" title={element.name} src={(element.poster_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${element.poster_path}`} style={{ marginBottom: "20px" }}></Card.Img>
                                 </Link>
                             </Col>
                         )
@@ -71,13 +71,13 @@ export default Detalhes
 export async function getServerSideProps(context) {
     const id = context.params.id
 
-    const resultadoAtor = await apiFilmes.get("/person/" + id + "?&language=pt-BR")
+    const resultadoAtor = await apiFilmes.get(`/person/${id}?&language=pt-BR`)
     const ator = resultadoAtor.data
 
-    const resultadoImagensAtor = await apiFilmes.get("/person/" + id + "/images")
+    const resultadoImagensAtor = await apiFilmes.get(`/person/${id}/images`)
     const atorImagens = resultadoImagensAtor.data.profiles
 
-    const resultadoFilmesSeriesAtor = await apiFilmes.get("/person/" + id + "/combined_credits")
+    const resultadoFilmesSeriesAtor = await apiFilmes.get(`/person/${id}/combined_credits`)
     const atorFilmesSeries = resultadoFilmesSeriesAtor.data.cast
 
     return {

@@ -10,3 +10,16 @@ export function dateFormatter(date) {
 export function numberFormatter(value) {
     return (value>0)?"$"+Intl.NumberFormat().format(value):"$"+value
 }
+
+export function timeFormatter(time) {
+    if (time < 60) {
+        return `${time}min`
+    } else {
+        const horas = Math.floor(time/ 60);          
+        const min = time % 60;
+        const textoHoras = (`00${horas}`).slice(-2);
+        const textoMinutos = (`00${min}`).slice(-2);
+        
+        return `${textoHoras }h ${textoMinutos}min`;
+    }
+}

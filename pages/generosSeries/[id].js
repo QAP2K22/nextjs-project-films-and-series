@@ -11,9 +11,9 @@ const index = (props) => {
 
     return (
         <>
-            <Pagina titulo="Séries">
+            <Pagina titulo={props.name}>
                 <Row md={3}>
-                    {props.series.map(item => (
+                    {props.films.map(item => (
                         <Col className='mt-3'>
                             <Item title={item.name} foto={(item.backdrop_path == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `https://image.tmdb.org/t/p/w500${item.backdrop_path}`} titulo={item.name} texto={`Lançamento: ${dateFormatter(item.first_air_date)}`} data={`Nota: ${item.vote_average}`} id={item.id} linkName="series"></Item>
                         </Col>
@@ -28,10 +28,14 @@ export default index
 
 
 export async function getServerSideProps(context) {
-    const resultado = await apiFilmes.get('/tv/popular?&language=pt-BR')
-    const series = resultado.data.results
+    const id = context.params.id
+    const name = context.query.name
+
+    const resultado = await apiFilmes.get(`/discover/tv?&with_genres=${id}&language=pt-BR`)
+    const films = resultado.data.results
+
 
     return {
-        props: { series },
+        props: { films, name },
     }
 }

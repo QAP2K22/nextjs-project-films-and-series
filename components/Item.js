@@ -4,8 +4,8 @@ import Link from 'next/link'
 const Item = (props) => {
   return (
     <>
-     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={props.foto} />
+     <Card style={{ width: '18rem', marginBottom: '12px' }}>
+      <Card.Img variant="top" src={props.foto} title={props.title} />
       <Card.Body>
         <Card.Title>{props.titulo}</Card.Title>
         <Card.Text>
