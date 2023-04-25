@@ -20,6 +20,6 @@ export function timeFormatter(time) {
         const textoHoras = (`00${horas}`).slice(-2);
         const textoMinutos = (`00${min}`).slice(-2);
         
-        return `${textoHoras }h ${textoMinutos}min`;
+        return `${textoHoras}h ${textoMinutos}min`;
     }
 }
