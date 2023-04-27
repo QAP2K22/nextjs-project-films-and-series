@@ -11,7 +11,7 @@ const index = ({filmes}) => {
 
     return (
         <>
-            <Pagina titulo="Filmes Recentes">
+            <Pagina titulo="Filmes em cartaz" title={"Qaflix"}>
                 <Row md={3}>
                     {filmes.map(item => (
                         <Col className='mt-3'>
@@ -31,7 +31,6 @@ export async function getServerSideProps(context) {
     const resultado = await apiFilmes.get('/movie/latest')
     const filmes = resultado.data
 
-    console.log(filmes)
 
     return {
         props: { filmes },

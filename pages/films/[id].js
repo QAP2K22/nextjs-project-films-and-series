@@ -4,12 +4,12 @@ import React from "react"
 import Pagina from "../../components/Pagina"
 import apiFilmes from "../ApiConnect/axiosAPIFilms"
 import { Card, Col, Row } from "react-bootstrap";
-import { dateFormatter, numberFormatter,timeFormatter } from "../functions/functions";
+import { dateFormatter, numberFormatter, timeFormatter } from "../functions/functions";
 
 const Detalhes = ({ filme, creditosFilmes }) => {
 
   return (
-    <Pagina titulo={filme.title}>
+    <Pagina titulo={filme.title} title={"Qaflix"}>
       <Row>
         <Col md={3}>
           <Card>
@@ -24,11 +24,11 @@ const Detalhes = ({ filme, creditosFilmes }) => {
           <p><b>Nota: </b>{filme.vote_average}</p>
           <ul>
             {filme.genres.map(element => (
-                <Link href={{
-                  pathname: `/generosFilmes/${element.id}`,
-                  query: { name: element.name },
-                }}>
-                <li>{element.name}</li>
+              <Link className="text-decoration-none" href={{
+                pathname: `/generos/${element.id}`,
+                query: { name: element.name, type: "film" },
+              }}>
+                <li className="text-primary">{element.name}</li>
               </Link>
             ))}
           </ul>

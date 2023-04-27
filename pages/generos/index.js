@@ -7,15 +7,15 @@ import Col from 'react-bootstrap/Col';
 import Pagina from '../../components/Pagina';
 import { dateFormatter } from '../functions/functions';
 
-const index = ({filmes}) => {
+const index = (props) => {
 
     return (
         <>
-            <Pagina titulo="Séries no ar" title={"Qaflix"}>
+            <Pagina titulo="Generos" title={"Qaflix"}>
                 <Row md={3}>
-                    {filmes.map(item => (
+                    {props.series.map(item => (
                         <Col className='mt-3'>
-                            <Item title={item.name} foto={(item.backdrop_path == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `https://image.tmdb.org/t/p/w500${item.backdrop_path}`} titulo={item.name} texto={`Lançamento: ${dateFormatter(item.first_air_date)}`} data={`Nota: ${item.vote_average}`} id={item.id} linkName="series"></Item>
+                            <Item title={item.original_title} foto={(item.backdrop_path == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `https://image.tmdb.org/t/p/w500${item.backdrop_path}`} titulo={item.original_title} texto={`Lançamento: ${dateFormatter(item.release_date)}`} data={`Nota: ${item.vote_average}`} id={item.id} linkName="films"></Item>
                         </Col>
                     ))}
                 </Row>
@@ -28,12 +28,10 @@ export default index
 
 
 export async function getServerSideProps(context) {
-    const resultado = await apiFilmes.get('/tv/on_the_air')
-    const filmes = resultado.data.results
-
-    console.log(filmes)
+    const resultado = await apiFilmes.get('/genre/tv/list?&language=pt-BR')
+    const series = resultado.data.genres
 
     return {
-        props: { filmes },
+        props: { series },
     }
 }

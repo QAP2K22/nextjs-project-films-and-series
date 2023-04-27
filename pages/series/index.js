@@ -11,7 +11,7 @@ const index = (props) => {
 
     return (
         <>
-            <Pagina titulo="Séries">
+            <Pagina titulo="Séries" title={"Qaflix"}>
                 <Row md={3}>
                     {props.series.map(item => (
                         <Col className='mt-3'>

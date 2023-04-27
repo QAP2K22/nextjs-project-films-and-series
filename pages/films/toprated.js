@@ -11,7 +11,7 @@ const index = ({filmes}) => {
 
     return (
         <>
-            <Pagina titulo="Top Rated">
+            <Pagina titulo="Top Rated" title={"Qaflix"}>
                 <Row md={3}>
                     {filmes.map(item => (
                         <Col className='mt-3'>

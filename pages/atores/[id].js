@@ -9,7 +9,7 @@ import { Card, Col, Row } from "react-bootstrap";
 const Detalhes = ({ ator, atorImagens, atorFilmesSeries }) => {
 
     return (
-        <Pagina titulo={ator.name}>
+        <Pagina titulo={ator.name} title={"Atores - Qaflix"}>
             <Row>
                 <Col md={3}>
                     <Card>

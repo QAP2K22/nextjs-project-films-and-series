@@ -9,15 +9,13 @@ import { dateFormatter } from '../functions/functions';
 
 const index = ({filmes}) => {
 
+    console.log(filmes)
+
     return (
         <>
-            <Pagina titulo="Lançamentos">
+            <Pagina titulo="Lançamentos" title={"Qaflix"}>
                 <Row md={3}>
-                    {filmes.map(item => (
-                        <Col className='mt-3'>
-                            <Item title={item.original_title} foto={(item.backdrop_path == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `https://image.tmdb.org/t/p/w500${item.backdrop_path}`} titulo={item.original_title} texto={`Lançamento: ${dateFormatter(item.release_date)}`} data={`Nota: ${item.vote_average}`} id={item.id} linkName="films"></Item>
-                        </Col>
-                    ))}
+                   
                 </Row>
             </Pagina>
         </>

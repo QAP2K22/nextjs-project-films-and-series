@@ -4,14 +4,14 @@ import React from "react"
 import Pagina from "../../components/Pagina"
 import apiFilmes from "../ApiConnect/axiosAPIFilms"
 import { Card, Col, Row } from "react-bootstrap";
-import { dateFormatter,timeFormatter } from "../functions/functions";
+import { dateFormatter, timeFormatter } from "../functions/functions";
 
 const Detalhes = ({ series, creditosSeries }) => {
 
   return (
-    <Pagina titulo={series.name}>
+    <Pagina titulo={series.name} title={"Qaflix"}>
       <Row>
-        
+
         <Col md={3}>
           <Card>
             <Card.Img variant="top" title={series.name} src={(series.poster_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${series.poster_path}`} />
@@ -26,12 +26,12 @@ const Detalhes = ({ series, creditosSeries }) => {
           <p><b>Status: </b>{series.status}</p>
           <ul>
             {series.genres.map(element => (
-               <Link href={{
-                pathname: `/generosSeries/${element.id}`,
-                query: { name: element.name },
+              <Link className="text-decoration-none" href={{
+                pathname: `/generos/${element.id}`,
+                query: { name: element.name, type: "tv" },
               }}>
-              <li>{element.name}</li>
-            </Link>
+                <li className="text-primary">{element.name}</li>
+              </Link>
             ))}
           </ul>
         </Col>
