@@ -7,15 +7,13 @@ import Col from 'react-bootstrap/Col';
 import Pagina from '../../components/Pagina';
 import { dateFormatter } from '../functions/functions';
 
-const index = ({filmes}) => {
-
-    console.log(filmes)
+const index = ({ filmes }) => {
 
     return (
         <>
-            <Pagina titulo="Lançamentos" title={"Qaflix"}>
+            <Pagina titulo="Lançamentos" title={"Qaflix"} navBarLink="/films">
                 <Row md={3}>
-                   
+                  
                 </Row>
             </Pagina>
         </>

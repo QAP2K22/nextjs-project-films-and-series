@@ -12,7 +12,7 @@ const index = (props) => {
     return (
         <>
             {props.type == "film" ?
-                <Pagina titulo={props.name} title={"Qaflix"}>
+                <Pagina titulo={props.name} title={"Qaflix"} navBarLink="/films">
                     <Row md={3}>
                         {props.films.map(item => (
                             <Col className='mt-3'>
@@ -23,7 +23,7 @@ const index = (props) => {
                 </Pagina>
 
                 :
-                <Pagina titulo={props.name} title={"Qaflix"}>
+                <Pagina titulo={props.name} title={"Qaflix"} navBarLink="/series">
                     <Row md={3}>
                         {props.films.map(item => (
                             <Col className='mt-3'>

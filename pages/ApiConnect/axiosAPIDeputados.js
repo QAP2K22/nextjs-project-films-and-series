@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiDeputados = axios.create({
-    baseURL: 'https://api.themoviedb.org/3',
+    baseURL: 'https://dadosabertos.camara.leg.br/api/v2',
    
 })
 

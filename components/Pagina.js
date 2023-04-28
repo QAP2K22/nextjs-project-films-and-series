@@ -29,18 +29,14 @@ const Pagina = (props) => {
 
       <Navbar variant="dark" key={"lg"} className='navBar' expand={"lg"} fixed="top">
         <Container fluid>
-          <Link className="navbar-brand" href={"/films"}>{props.navBarTitle ? props.navBarTitle : "QAPROJECT"}</Link>
+          <Link className="navbar-brand" href={props.navBarLink?props.navBarLink:"/"}>{props.navBarTitle ? props.navBarTitle : "QAPROJECT"}</Link>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"lg"}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-${"lg"}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-${"lg"}`}
             placement="end"
           >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${"lg"}`} className='text'>
-                Offcanvas
-              </Offcanvas.Title>
-            </Offcanvas.Header>
+        
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Link className="nav-link" href={"/atores"}>Atores</Link>
@@ -50,20 +46,20 @@ const Pagina = (props) => {
                   title="Séries"
                   id={`offcanvasNavbarDropdown-expand-${"lg"}`}
                 >
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
+                  <Link className="dropdown-item" href={"/series/populares"}>Populares</Link>
+                  <Link className="dropdown-item" href={"/series/noar"}>No Ar</Link>
+                  <Link className="dropdown-item" href={"/series/estreantes"}>Estreias</Link>
+                  <Link className="dropdown-item" href={"/series/uprated"}>Top Rated</Link>
                 </NavDropdown>
 
                 <NavDropdown
                   title="Filmes"
                   id={`offcanvasNavbarDropdown-expand-${"lg"}`}
                 >
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
-                  <Link className="dropdown-item" href={"/films"}>Gêneros</Link>
+                  <Link className="dropdown-item" href={"/films/populares"}>Populares</Link>
+                  <Link className="dropdown-item" href={"/films/lancamentos"}>Lançamentos</Link>
+                  <Link className="dropdown-item" href={"/films/emcartaz"}>Em cartaz</Link>
+                  <Link className="dropdown-item" href={"/films/toprated"}>Top Rated</Link>
                 </NavDropdown>
               </Nav>
               <Form className="d-flex">

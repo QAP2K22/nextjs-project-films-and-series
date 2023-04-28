@@ -9,9 +9,11 @@ import { dateFormatter } from '../functions/functions';
 
 const index = ({filmes}) => {
 
+    console.log(filmes)
+
     return (
         <>
-            <Pagina titulo="Filmes em cartaz" title={"Qaflix"}>
+            <Pagina titulo="Filmes em cartaz" title={"Qaflix"} navBarLink="/films">
                 <Row md={3}>
                     {filmes.map(item => (
                         <Col className='mt-3'>
@@ -28,9 +30,8 @@ export default index
 
 
 export async function getServerSideProps(context) {
-    const resultado = await apiFilmes.get('/movie/latest')
-    const filmes = resultado.data
-
+    const resultado = await apiFilmes.get('/movie/now_playing')
+    const filmes = resultado.data.results
 
     return {
         props: { filmes },

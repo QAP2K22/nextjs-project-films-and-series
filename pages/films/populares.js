@@ -11,7 +11,7 @@ const index = ({filmes}) => {
 
     return (
         <>
-            <Pagina titulo="Séries Populares" title={"Qaflix"}>
+            <Pagina titulo="Séries Populares" title={"Qaflix"} navBarLink="/films">
                 <Row md={3}>
                     {filmes.map(item => (
                         <Col className='mt-3'>

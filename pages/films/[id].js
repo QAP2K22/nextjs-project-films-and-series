@@ -9,7 +9,7 @@ import { dateFormatter, numberFormatter, timeFormatter } from "../functions/func
 const Detalhes = ({ filme, creditosFilmes }) => {
 
   return (
-    <Pagina titulo={filme.title} title={"Qaflix"}>
+    <Pagina titulo={filme.title} title={"Qaflix"} navBarLink="/films">
       <Row>
         <Col md={3}>
           <Card>
