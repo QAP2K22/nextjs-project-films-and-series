@@ -1,23 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
-import Item from '../../components/Item'
 import apiFilmes from '../ApiConnect/axiosAPIFilms'
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Pagina from '../../components/Pagina';
+import ItemGaleria from '@/components/ItemGaleria';
 
-const index = (props) => {
-
+const index = ({ atores }) => {
     return (
         <>
             <Pagina titulo="Atores do momento" title={"Qaflix"}>
-                <Row md={3}>
-                    {props.atores.map(item => (
-                        <Col className='mt-3'>
-                            <Item title={item.name} foto={(item.profile_path == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `https://image.tmdb.org/t/p/w500${item.profile_path}`} titulo={item.name}  id={item.id} linkName="atores"></Item>
-                        </Col>
-                    ))}
-                </Row>
+                <ItemGaleria
+                    arrayName={atores}
+                    photoName="profile_path"
+                    titleName="name"
+                    linkId="id"
+                    linkName="atores"
+                />
             </Pagina>
         </>
     )

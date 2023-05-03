@@ -9,7 +9,7 @@ import { dateFormatter, numberFormatter, timeFormatter } from "../functions/func
 const Detalhes = ({ filme, creditosFilmes }) => {
 
   return (
-    <Pagina titulo={filme.title} title={"Qaflix"} navBarLink="/films">
+    <Pagina titulo={filme.title} title={"Qaflix"} navBarLink="/films" navBarItem="films">
       <Row>
         <Col md={3}>
           <Card>
@@ -24,7 +24,7 @@ const Detalhes = ({ filme, creditosFilmes }) => {
           <p><b>Nota: </b>{filme.vote_average}</p>
           <ul>
             {filme.genres.map(element => (
-              <Link className="text-decoration-none" href={{
+              <Link className="text-decoration-none" key={element.id} href={{
                 pathname: `/generos/${element.id}`,
                 query: { name: element.name, type: "film" },
               }}>
@@ -38,8 +38,8 @@ const Detalhes = ({ filme, creditosFilmes }) => {
       <Row>
         <h2 className="pt-5">Atores</h2>
         {creditosFilmes.map(element => (
-          <Col md={2}>
-            <Link href={`/atores/${element.id}`}>
+          <Col key={element.id} md={2}>
+            <Link key={element.id} href={`/atores/${element.id}`}>
               <Card.Img variant="top" title={element.name} src={(element.profile_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${element.profile_path}`} style={{ marginBottom: "20px" }}></Card.Img>
             </Link>
           </Col>

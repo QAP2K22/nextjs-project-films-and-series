@@ -1,24 +1,27 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
-import Item from '../../components/Item'
 import apiFilmes from '../ApiConnect/axiosAPIFilms'
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Pagina from '../../components/Pagina';
-import { dateFormatter } from '../functions/functions';
+import ItemGaleria from '@/components/ItemGaleria';
 
-const index = ({filmes}) => {
+const index = ({ filmes }) => {
 
     return (
         <>
-            <Pagina titulo="Séries Estreantes" title={"Qaflix"} navBarLink="/series">
-                <Row md={3}>
-                    {filmes.map(item => (
-                        <Col className='mt-3'>
-                            <Item title={item.name} foto={(item.backdrop_path == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `https://image.tmdb.org/t/p/w500${item.backdrop_path}`} titulo={item.name} texto={`Lançamento: ${dateFormatter(item.first_air_date)}`} data={`Nota: ${item.vote_average}`} id={item.id} linkName="series"></Item>
-                        </Col>
-                    ))}
-                </Row>
+            <Pagina titulo="Séries Estreantes" title={"Qaflix"} navBarLink="/series" navBarItem="films">
+                <ItemGaleria
+                    arrayName={filmes}
+                    photoName="backdrop_path"
+                    titleName="name"
+                    primaryText="Data de lançamento:"
+                    primaryTextFormatter="dateFormatter"
+                    primaryTextName="first_air_date"
+                    secondaryText="Popularidade:"
+                    secondaryTextName="vote_average"
+                    linkId="id"
+                    linkName="series"
+
+                />
             </Pagina>
         </>
     )
@@ -28,7 +31,7 @@ export default index
 
 
 export async function getServerSideProps(context) {
-    const resultado = await apiFilmes.get('/tv/on_the_air')
+    const resultado = await apiFilmes.get('/tv/on_the_air?&language=pt-BR`')
     const filmes = resultado.data.results
 
     return {

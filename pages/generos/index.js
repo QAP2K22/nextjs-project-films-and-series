@@ -12,10 +12,10 @@ const index = (props) => {
 
     return (
         <>
-            <Pagina titulo="Gêneros" title={"Qaflix"} navBarLink="/films">
+            <Pagina titulo="Gêneros" title={"Qaflix"} navBarLink="/films" navBarItem="films">
                 <h2 className="pt-5">Filmes</h2>
                 {props.filmsGeneros.map(item => (
-                    <Link href={{
+                    <Link key={item.id} href={{
                         pathname: `/generos/${item.id}`,
                         query: { name: item.name, type: "film" },
                     }} className="btn btn-warning mx-2 my-2 text-center">{item.name}</Link>
@@ -24,7 +24,7 @@ const index = (props) => {
 
                 <h2 className="pt-5">Séries</h2>
                 {props.seriesGeneros.map(item => (
-                    <Link href={{
+                    <Link key={item.id} href={{
                         pathname: `/generos/${item.id}`,
                         query: { name: item.name, type: "tv" },
                     }} className="btn btn-warning mx-2 my-2 text-center">{item.name}</Link>

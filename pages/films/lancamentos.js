@@ -11,7 +11,7 @@ const index = ({ filmes }) => {
 
     return (
         <>
-            <Pagina titulo="Lançamentos" title={"Qaflix"} navBarLink="/films">
+            <Pagina titulo="Lançamentos" title={"Qaflix"} navBarLink="/films" navBarItem="films">
                 <Row md={3}>
                   
                 </Row>

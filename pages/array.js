@@ -15,19 +15,21 @@ const carros = [
 ]
 
 const array = () => {
+
   return (
     <div>
-      <Pagina titulo="Carros" title="Array" backgroundColor="secondary">
-      <Row md={4}>
+    
+
+      <Pagina titulo="Carros" title="Array" navBarLink="/" >
+        <Row md={4}>
           {carros.map(element => (
-            <Col className='mt-3'>
+            <Col key={element.id} className='mt-3'>
               <Card>
-                <Card.Img variant="top" src={element.foto} />
+                <Card.Img variant="top" src={element.foto} style={{height: '14rem'}} />
                 <Card.Body className="mt-2 mb-3">
                   <Card.Title>{element.marca} - {element.modelo}</Card.Title>
                   <Card.Text>
                     Ano: <b>{element.ano}</b>
-
                     <Button className="primary float-end mx-3">Detalhes</Button>
                   </Card.Text>
                 </Card.Body>
@@ -35,8 +37,9 @@ const array = () => {
             </Col>
           ))}
         </Row>
-
       </Pagina>
+
+    
     </div>
   )
 }

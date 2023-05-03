@@ -1,15 +1,26 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link"
-import React from "react"
+import React, { useState } from "react"
 import Pagina from "../../components/Pagina"
 import apiFilmes from "../ApiConnect/axiosAPIFilms"
-import { Card, Col, Row } from "react-bootstrap";
-import { dateFormatter, timeFormatter } from "../functions/functions";
+import { Accordion, Button, Card, Col, Modal, Row, Table } from "react-bootstrap";
+import { dateFormatter } from "../functions/functions";
 
 const Detalhes = ({ series, creditosSeries }) => {
+series.seasons
+  const [show, setShow] = useState(false);
+  const [temporada, setTemporada] = useState({});
+
+  const handleClose = () => setShow(false);
+
+  async function handleShow(season_number) {
+    const temporada = await apiFilmes.get(`/tv/${series.id}/season/${season_number}/credits`)
+    setTemporada(temporada.data)
+    setShow(true);
+  }
 
   return (
-    <Pagina titulo={series.name} title={"Qaflix"} navBarLink="/series">
+    <Pagina titulo={series.name} title={"Qaflix"} navBarLink="/series" navBarItem="films">
       <Row>
 
         <Col md={3}>
@@ -26,7 +37,7 @@ const Detalhes = ({ series, creditosSeries }) => {
           <p><b>Status: </b>{series.status}</p>
           <ul>
             {series.genres.map(element => (
-              <Link className="text-decoration-none" href={{
+              <Link key={element.id} className="text-decoration-none" href={{
                 pathname: `/generos/${element.id}`,
                 query: { name: element.name, type: "tv" },
               }}>
@@ -37,11 +48,74 @@ const Detalhes = ({ series, creditosSeries }) => {
         </Col>
       </Row>
 
+      <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{temporada.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Col md={4}>
+              <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + temporada.poster_path} />
+            </Col>
+            <Col md={8}>
+              <Accordion defaultActiveKey="0">
+                {temporada.episodes && temporada.episodes.map(item => (
+                  <Accordion.Item key={item.id} eventKey={item.id}>
+                    <Accordion.Header>{item.name}</Accordion.Header>
+                    <Accordion.Body>
+                      <Card className="mb-3">
+                        {item.still_path &&
+                          <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.still_path} />
+                        }
+                        <Card.Body>
+                          {item.overview}
+                        </Card.Body>
+                      </Card>
+
+                    </Accordion.Body>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <h2 className='mt-3'>Temporadas</h2>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Capa</th>
+            <th>Temporada</th>
+            <th>Episódios</th>
+            <th>Sinopse</th>
+          </tr>
+        </thead>
+        <tbody>
+          {series.seasons.map(item => (
+
+            <tr key={item.id}>
+              <td width="10%">
+                <Card.Img onClick={() => handleShow(item.season_number)} variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
+              </td>
+              <td width="15%">{item.name}</td>
+              <td width="5%">{item.episode_count}</td>
+              <td>{item.overview}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
       <Row>
         <h2 className="pt-5">Atores</h2>
         {creditosSeries.map(element => (
-          <Col md={2}>
-            <Link href={`/atores/${element.id}`}>
+          <Col key={element.id} md={2}>
+            <Link  href={`/atores/${element.id}`}>
               <Card.Img variant="top" title={element.name} src={(element.profile_path == null) ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg?w=2000" : `https://image.tmdb.org/t/p/w500${element.profile_path}`} style={{ marginBottom: "20px" }}></Card.Img>
             </Link>
           </Col>

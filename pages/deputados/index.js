@@ -14,8 +14,8 @@ const index = (props) => {
                 <h2 className="pt-5">Deputados</h2>
                 <Row md={3}>
                     {props.Deputados.map(item => (
-                        <Col className='mt-3'>
-                            <Item title={item.nome} foto={(item.urlFoto == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `${item.urlFoto}`} titulo={item.nome} texto={`Inicio: ${dateFormatter(item.dataInicio)}`} data={`Fim: ${dateFormatter(item.dataFim)}`} id={item.id} linkName=""></Item>
+                        <Col key={item.id} className='mt-3'>
+                            <Item title={item.nome} foto={(item.urlFoto == null) ? "http://cdn4.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg" : `${item.urlFoto}`} titulo={item.nome} texto={`Inicio: ${dateFormatter(item.dataInicio)}`} data={`Fim: ${dateFormatter(item.dataFim)}`} id={item.id} linkName="deputados"></Item>
                         </Col>
                     ))}
                 </Row>

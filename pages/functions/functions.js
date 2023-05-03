@@ -3,7 +3,7 @@ export function dateFormatter(date) {
         return "Data de nascimento não foi cadastrada." 
     } else {
         let data = new Date(date);
-        return new Intl.DateTimeFormat('pt-BR', {timeZone: 'UTC'}).format(data)
+        return new Intl.DateTimeFormat('pt-BR', {timeZone: 'UTC'}).format(data) 
     }
 };
 
