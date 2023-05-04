@@ -6,11 +6,11 @@ import { Navbar, Container, Nav, NavDropdown, Form, Button, Offcanvas } from "re
 
 const dynamicNavBar = {
   "main": [
-   
+
   ],
 
   "Deputados": [
-   
+
   ],
 
   "films": [
@@ -114,12 +114,16 @@ const Pagina = (props) => {
       <Navbar variant="dark" key={"lg"} className='navBar' expand={"lg"} fixed="top">
         <Container fluid>
           <Link className="navbar-brand" href={props.navBarLink ?? ""}>{props.navBarTitle ?? "QAPROJECT"}</Link>
+          
+          {dynamicNavBar[props.navBarItem ?? "main"].length > 0?
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"lg"}`} />
+          :<></>}
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-${"lg"}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-${"lg"}`}
             placement="end"
           >
+          
 
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -149,7 +153,8 @@ const Pagina = (props) => {
                           <Button variant="outline-success">Buscar</Button>
                         </Form>)
                       }
-                  }})}
+                  }
+                })}
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

@@ -1,11 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
-import Item from '../../components/Item'
 import apiFilmes from '../ApiConnect/axiosAPIFilms'
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Pagina from '../../components/Pagina';
-import { dateFormatter } from '../functions/functions';
 
 const index = ({ filmes }) => {
 
