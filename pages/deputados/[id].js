@@ -1,56 +1,90 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import Link from "next/link"
-import React, { useState } from "react"
-import Pagina from "../../components/Pagina"
-import apiDeputados from "../ApiConnect/axiosAPIDeputados"
-import { Accordion, Button, Card, Col, Modal, Row, Table } from "react-bootstrap";
+import { Card, Container, Table } from "react-bootstrap"
+import axiosAPIDeputados from "../ApiConnect/axiosAPIDeputados"
+import Pagina from "@/components/Pagina"
 import { dateFormatter } from "../functions/functions";
+import { BiBookAlt } from "react-icons/bi"
+import Link from "next/link"
 
-const Detalhes = ({ deputados }) => {
-
+const index = ({ Deputado, GastosDeputado, profissoesDeputado }) => {
   return (
-    <Pagina titulo="Despesas" title={"Deputados"} navBarLink="/deputados" navBarItem="deputados">
-      {deputados.map(element => (
-        <Accordion key={element.codDocumento} defaultActiveKey={element.codDocumento}>
-        <Accordion.Item eventKey={element.codDocumento}>
-          <Accordion.Header>{`#${element.codDocumento} - ${element.nomeFornecedor} (${element.tipoDespesa})`}</Accordion.Header>
-          <Accordion.Body>
-            {`Ano: ${element.ano}`} <br/>
-            {`Cnpj/Cpf fornecedor: ${element.cnpjCpfFornecedor}`}<br/>
-            {`Código documento: ${element.codDocumento}`}<br/>
-            {`Código lote: ${element.codLote}`}<br/>
-            {`Código tipo documento: ${element.codTipoDocumento}`}<br/>
-            {`Data de emissão${element.dataDocumento}`}<br/>
-            {`Mês: ${element.mes}`}<br/>
-            {`Nome fornecedor: ${element.nomeFornecedor}`}<br/>
-            {`Número doumento: ${element.numDocumento}`}<br/>
-            {`Número de ressarcimento: ${element.numRessarcimento}`}<br/>
-            {`Nº parcelas: ${element.parcela}`}<br/>
-            {`Tipo de despesa: ${element.tipoDespesa}`}<br/>
-            {`Tipo de documento: ${element.tipoDocumento}`}<br/>
-            <a href={element.urlDocumento}>Documento</a><br/>
-            {`Documento R$${element.valorDocumento}`}<br/>
-            {`Valor Glosa R$${element.valorGlosa}`}<br/>
-            {`Valor Liquido R$${element.valorLiquido}`}<br/>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-      ))}
+    <>
+      <Pagina titulo={Deputado.nomeCivil} title="Deputados" navBarLink="/deputados">
+        <Container>
+          <div className="d-flex">
+            <div className="mt-3">
+              <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" title={Deputado.nomeCivil} src={Deputado["ultimoStatus"].urlFoto} />
+                <Card.Body>
+                  <Card.Title>{Deputado.nomeCivil}</Card.Title>
+                  <p><strong>Partido:</strong> {Deputado["ultimoStatus"].siglaPartido}</p>
+                  <p><strong>Uf Partido:</strong> {Deputado["ultimoStatus"].siglaUf}</p>
+                </Card.Body>
+              </Card>
+              <Link class="btn btn-danger mt-2" href="/deputados">Voltar</Link>
+            </div>
 
 
-    
-    </Pagina>
+            <div className="flex-column mt-3 px-5">
+              <h2>Despesas</h2>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>NF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {GastosDeputado.map(item => (
+                    <tr key={item.numDocumento}>
+                      <td>{dateFormatter(item.dataDocumento)}</td>
+                      <td>{item.tipoDespesa}</td>
+                      <td>R$ {item.valorDocumento}</td>
+                      <td>
+                        {item.urlDocumento &&
+                          <a href={item.urlDocumento} target="_blank"><BiBookAlt /></a>
+                        }
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+
+
+            <div className="flex-column mt-3 px-2">
+              <h2>Profissões</h2>
+              <ul>
+                {profissoesDeputado.map(item => (
+                  <li key={Math.random()}>{item.titulo}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </Pagina>
+
+    </>
   )
 }
 
-export default Detalhes
+export default index
+
+
 export async function getServerSideProps(context) {
   const id = context.params.id
 
-  const resultado = await apiDeputados.get(`/deputados/${id}/despesas`)
-  const deputados = resultado.data.dados
+  const resultadoDeputado = await axiosAPIDeputados.get(`/deputados/${id}`)
+  const Deputado = resultadoDeputado.data.dados
+
+  const resultadoGastosDeputado = await axiosAPIDeputados.get(`/deputados/${id}/despesas`)
+  const GastosDeputado = resultadoGastosDeputado.data.dados
+
+  const resultadoprofissoesDeputado = await axiosAPIDeputados.get(`/deputados/${id}/profissoes`)
+  const profissoesDeputado = resultadoprofissoesDeputado.data.dados
 
   return {
-    props: { deputados },
+    props: { Deputado, GastosDeputado, profissoesDeputado },
   }
 }

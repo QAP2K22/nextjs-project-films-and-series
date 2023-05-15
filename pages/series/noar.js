@@ -12,6 +12,7 @@ const index = ({ filmes }) => {
                 <ItemGaleria
                     arrayName={filmes}
                     photoName="backdrop_path"
+                    photoLinkName="https://image.tmdb.org/t/p/w500"
                     titleName="name"
                     primaryText="Data de lançamento:"
                     primaryTextFormatter="dateFormatter"
@@ -20,7 +21,6 @@ const index = ({ filmes }) => {
                     secondaryTextName="vote_average"
                     linkId="id"
                     linkName="series"
-
                 />
             </Pagina>
         </>

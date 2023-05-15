@@ -12,6 +12,7 @@ const index = ({films}) => {
                 <ItemGaleria
                     arrayName={films}
                     photoName="backdrop_path"
+                    photoLinkName="https://image.tmdb.org/t/p/w500"
                     titleName="original_title"
                     primaryText="Data de lançamento:"
                     primaryTextFormatter="dateFormatter"

@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Item = (props) => {
   return (
     <>
-      <Card className="shadow mb-2 bg-white rounded" style={{ maxWidth: "18rem",  marginBottom: '12px' }}>
+      <Card className="shadow mb-2 bg-white rounded" style={{ maxWidth: "18rem", marginBottom: '12px' }}>
         {props.initialStyle ?
           <Card.Img variant="top" src={props.foto ? props.foto : "https://cdn.discordapp.com/attachments/780615034816036897/1099187480349118626/devqap.png"} style={{ height: '14rem' }} title={props.title} />
 

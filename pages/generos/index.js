@@ -1,11 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
-import Item from '../../components/Item'
 import apiFilmes from '../ApiConnect/axiosAPIFilms'
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Pagina from '../../components/Pagina';
-import { dateFormatter } from '../functions/functions';
 import Link from 'next/link';
 
 const index = (props) => {
@@ -35,7 +31,6 @@ const index = (props) => {
 }
 
 export default index
-
 
 export async function getServerSideProps(context) {
     const resultadoFilms = await apiFilmes.get('/genre/movie/list?&language=pt-BR')

@@ -12,6 +12,7 @@ const index = (props) => {
                 <ItemGaleria
                     arrayName={props.series}
                     photoName="backdrop_path"
+                    photoLinkName="https://image.tmdb.org/t/p/w500"
                     titleName="name"
                     primaryText="Data de lançamento:"
                     primaryTextFormatter="dateFormatter"

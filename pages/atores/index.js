@@ -7,10 +7,11 @@ import ItemGaleria from '@/components/ItemGaleria';
 const index = ({ atores }) => {
     return (
         <>
-            <Pagina titulo="Atores do momento" title={"Qaflix"}>
+            <Pagina titulo="Atores do momento" title="Qaflix">
                 <ItemGaleria
                     arrayName={atores}
                     photoName="profile_path"
+                    photoLinkName="https://image.tmdb.org/t/p/w500"
                     titleName="name"
                     linkId="id"
                     linkName="atores"

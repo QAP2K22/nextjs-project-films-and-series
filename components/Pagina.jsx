@@ -113,7 +113,7 @@ const Pagina = (props) => {
 
       <Navbar variant="dark" key={"lg"} className='navBar' expand={"lg"} fixed="top">
         <Container fluid>
-          <Link className="navbar-brand" href={props.navBarLink ?? ""}>{props.navBarTitle ?? "QAPROJECT"}</Link>
+          <Link className="navbar-brand" href={props.navBarLink ?? "/"}>{props.navBarTitle ?? "QAPROJECT"}</Link>
           
           {dynamicNavBar[props.navBarItem ?? "main"].length > 0?
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"lg"}`} />
