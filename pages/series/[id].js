@@ -14,7 +14,7 @@ series.seasons
   const handleClose = () => setShow(false);
 
   async function handleShow(season_number) {
-    const temporada = await apiFilmes.get(`/tv/${series.id}/season/${season_number}/credits`)
+    const temporada = await apiFilmes.get(`/tv/${series.id}/season/${season_number}`)
     setTemporada(temporada.data)
     setShow(true);
   }

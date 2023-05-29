@@ -75,8 +75,7 @@ const dynamicNavBar = {
     {
       type: "seach",
       active: true,
-      text: "qap",
-      href: ""
+      text: "qap"
     },
 
   ]
@@ -89,20 +88,19 @@ const Pagina = (props) => {
     <>
       <style type="text/css">
         {`
-        .navBar {
-          background: #000814;
-        }
+          .navBar {
+            background: #000814;
+          }
 
-        .header {
-          background: #001d3d;
-          box-shadow: 0 .125rem .25rem rgba(0,0,0,1)!important;
-        }
+          .header {
+            background: #001d3d;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,1)!important;
+          }
 
-        .footer {
-          background: #001d3d;
-          box-shadow: .125rem 0 .25rem rgba(0,0,0,1)!important;
-        }
-      }
+          .footer {
+            background: #001d3d;
+            box-shadow: .125rem 0 .25rem rgba(0,0,0,1)!important;
+          }
         `}
       </style>
 
@@ -111,19 +109,19 @@ const Pagina = (props) => {
         <title>{props.title ?? "Qaproject"}</title>
       </Head>
 
-      <Navbar variant="dark" key={"lg"} className='navBar' expand={"lg"} fixed="top">
+      <Navbar variant="dark" key="lg" className='navBar' expand="lg" fixed="top">
         <Container fluid>
           <Link className="navbar-brand" href={props.navBarLink ?? "/"}>{props.navBarTitle ?? "QAPROJECT"}</Link>
-          
-          {dynamicNavBar[props.navBarItem ?? "main"].length > 0?
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"lg"}`} />
-          :<></>}
+
+          {dynamicNavBar[props.navBarItem ?? "main"].length > 0 ?
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+            : <></>}
           <Navbar.Offcanvas
-            id={`offcanvasNavbar-expand-${"lg"}`}
-            aria-labelledby={`offcanvasNavbarLabel-expand-${"lg"}`}
+            id={`offcanvasNavbar-expand-lg`}
+            aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="end"
           >
-          
+
 
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -161,8 +159,6 @@ const Pagina = (props) => {
         </Container>
       </Navbar>
 
-
-
       <header className="header text-light text-center py-5 mb-5 mt-5 w-100">
         <h1>{(props.titulo) ? props.titulo : "Página sem nome"}</h1>
       </header>
@@ -171,12 +167,6 @@ const Pagina = (props) => {
       <Container>
         {props.children}
       </Container>
-
-      {/*<footer style={{ width: '100%' }} className="position-fixed bottom-0 footer text-light text-center py-5 mt-5">
-        <h1>Developed by QAP</h1>
-    </footer>*/}
-
-
     </>
   )
 }

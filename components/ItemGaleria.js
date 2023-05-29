@@ -17,7 +17,7 @@ const ItemGaleria = (props) => {
               <Card.Body>
                 {item[props.titleName] &&
                   <Card.Title>
-                    {item[props.titleName] ?? "Titulo não informado"}
+                    {item[props.titleName]}
                   </Card.Title>
                 }
 

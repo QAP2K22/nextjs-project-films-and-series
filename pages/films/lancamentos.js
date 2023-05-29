@@ -1,17 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import apiFilmes from '../ApiConnect/axiosAPIFilms'
-import Row from 'react-bootstrap/Row';
 import Pagina from '../../components/Pagina';
 
 const index = ({ filmes }) => {
 
     return (
         <>
-            <Pagina titulo="Lançamentos" title={"Qaflix"} navBarLink="/films" navBarItem="films">
-                <Row md={3}>
-                  
-                </Row>
+            <Pagina titulo="Lançamentos (Sem dados na API)" title={"Qaflix"} navBarLink="/films" navBarItem="films">
             </Pagina>
         </>
     )

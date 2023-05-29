@@ -31,6 +31,7 @@ const index = ({ films, name, type }) => {
                     <ItemGaleria
                         arrayName={films}
                         photoName="backdrop_path"
+                        photoLinkName="https://image.tmdb.org/t/p/w500"
                         titleName="name"
                         primaryText="Data de lançamento:"
                         primaryTextFormatter="dateFormatter"
@@ -48,7 +49,6 @@ const index = ({ films, name, type }) => {
 }
 
 export default index
-
 
 export async function getServerSideProps(context) {
     const id = context.params.id
